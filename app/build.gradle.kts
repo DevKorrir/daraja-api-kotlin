@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,13 +8,16 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+fun keysProperty(key: String, default: String = ""): String {
+    val props = Properties()
+    val file = File(rootProject.projectDir, "keys.properties")
+    if (file.exists()) FileInputStream(file).use { props.load(it) }
+    return props.getProperty(key, default)
+}
+
 android {
     namespace = "dev.korryr.epesa"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "dev.korryr.epesa"
@@ -21,6 +27,13 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CONSUMER_KEY",        "\"${keysProperty("mpesa.consumerKey")}\"")
+        buildConfigField("String", "CONSUMER_SECRET",     "\"${keysProperty("mpesa.consumerSecret")}\"")
+        buildConfigField("String", "PASSKEY",             "\"${keysProperty("mpesa.passkey")}\"")
+        buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("mpesa.callbackUrl")}\"")
+        buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("mpesa.businessShortCode")}\"")
+        buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
     }
 
     buildTypes {
@@ -38,6 +51,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -58,21 +72,19 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    // Hilt Dependency Injection
+    // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // Networking (Retrofit & OkHttp)
+    // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
 
-    // Timber for logging
+    // Timber
     implementation(libs.timber)
 
     // Navigation
-    //implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-
 }
