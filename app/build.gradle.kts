@@ -1,8 +1,18 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+}
+
+fun keysProperty(key: String, default: String = "") : String {
+    val props = Properties()
+    val file = File(rootProject.projectDir,"keys.properties")
+    if (file.exists()) FileInputStream(file).use { props.load(it) }
+    return props.getProperty(key, default)
 }
 
 android {
@@ -21,6 +31,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CONSUMER_KEY",        "\"${keysProperty("mpesa.consumerKey")}\"")
+        buildConfigField("String", "CONSUMER_SECRET",     "\"${keysProperty("mpesa.consumerSecret")}\"")
+        buildConfigField("String", "PASSKEY",             "\"${keysProperty("mpesa.passkey")}\"")
+        buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("mpesa.callbackUrl")}\"")
+        buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("mpesa.businessShortCode")}\"")
+        buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
+    
     }
 
     buildTypes {

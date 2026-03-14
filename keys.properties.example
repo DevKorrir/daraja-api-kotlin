@@ -1,0 +1,25 @@
+# =============================================================================
+# M-Pesa Daraja API Credentials — EXAMPLE FILE
+# =============================================================================
+# 1. Copy this file and rename it to:  keys.properties
+# 2. Fill in your real credentials below
+# 3. keys.properties is in .gitignore — it will NEVER be committed
+# 4. This file (keys.properties.example) IS committed — it's safe, no real keys
+#
+# Get your credentials at: https://developer.safaricom.co.ke
+# =============================================================================
+
+# From: Developer Portal → Your App → Keys & Secrets
+mpesa.consumerKey=
+mpesa.consumerSecret=
+
+# From: Developer Portal → Test Credentials → Lipa Na Mpesa Online
+mpesa.passkey=
+
+# Sandbox business short code — default is 174379, leave as is for sandbox
+mpesa.businessShortCode=174379
+
+# A publicly reachable URL where Safaricom POSTs the payment result
+# For local testing, use ngrok: https://ngrok.com
+# Example: https://abc123.ngrok.io/mpesa/callback
+mpesa.callbackUrl=
