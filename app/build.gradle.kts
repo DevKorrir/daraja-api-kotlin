@@ -29,16 +29,26 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "CONSUMER_KEY",        "\"${keysProperty("mpesa.consumerKey")}\"")
-        buildConfigField("String", "CONSUMER_SECRET",     "\"${keysProperty("mpesa.consumerSecret")}\"")
-        buildConfigField("String", "PASSKEY",             "\"${keysProperty("mpesa.passkey")}\"")
-        buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("mpesa.callbackUrl")}\"")
-        buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("mpesa.businessShortCode")}\"")
-        buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
+
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "CONSUMER_KEY",        "\"${keysProperty("mpesa.consumerKey")}\"")
+            buildConfigField("String", "CONSUMER_SECRET",     "\"${keysProperty("mpesa.consumerSecret")}\"")
+            buildConfigField("String", "PASSKEY",             "\"${keysProperty("mpesa.passkey")}\"")
+            buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("mpesa.callbackUrl")}\"")
+            buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("mpesa.businessShortCode")}\"")
+            buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
+        }
         release {
+            buildConfigField("String", "CONSUMER_KEY",        "\"${keysProperty("prod.mpesa.consumerKey")}\"")
+            buildConfigField("String", "CONSUMER_SECRET",     "\"${keysProperty("prod.mpesa.consumerSecret")}\"")
+            buildConfigField("String", "PASSKEY",             "\"${keysProperty("prod.mpesa.passkey")}\"")
+            buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("prod.mpesa.callbackUrl")}\"")
+            buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("prod.mpesa.businessShortCode")}\"")
+            buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -68,6 +78,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.foundation.layout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
