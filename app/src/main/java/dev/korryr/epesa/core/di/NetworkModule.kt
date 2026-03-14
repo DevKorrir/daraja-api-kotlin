@@ -22,7 +22,7 @@ object NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor { Timber.tag("OkHttp").d(it) }.apply {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-                    else HttpLoggingInterceptor.Level.NONE
+            else HttpLoggingInterceptor.Level.NONE
         }
         return OkHttpClient.Builder()
             .addInterceptor(logging)

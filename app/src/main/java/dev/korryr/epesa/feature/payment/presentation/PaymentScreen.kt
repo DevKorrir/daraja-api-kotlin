@@ -32,7 +32,6 @@ fun PaymentScreen(
     var showPayDialog by remember { mutableStateOf(false) }
     var phoneNumber   by remember { mutableStateOf("") }
 
-    // Derive result message directly from state — single source of truth
     val resultMessage: String? = when (val s = uiState) {
         is PaymentUiState.Success -> "✅ ${s.message}\n\nTransaction ID: ${s.transactionId}"
         is PaymentUiState.Error   -> "❌ ${s.message}"
@@ -67,15 +66,11 @@ fun PaymentScreen(
     ) { padding ->
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
+            modifier = Modifier.fillMaxSize().padding(padding)
         ) {
             Button(
                 onClick  = { showPayDialog = true },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)
             ) {
                 Text("Pay with M-Pesa")
             }

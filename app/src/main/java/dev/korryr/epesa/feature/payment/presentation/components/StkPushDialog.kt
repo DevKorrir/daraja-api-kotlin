@@ -60,16 +60,10 @@ fun StkPushDialog(
             }
         },
         confirmButton = {
-            Button(
-                onClick = { onConfirm(amount) },
-                enabled = !isLoading
-            ) { Text("Pay") }
+            Button(onClick = { onConfirm(amount) }, enabled = !isLoading) { Text("Pay") }
         },
         dismissButton = {
-            TextButton(
-                onClick = onDismiss,
-                enabled = !isLoading
-            ) { Text("Cancel") }
+            TextButton(onClick = onDismiss, enabled = !isLoading) { Text("Cancel") }
         }
     )
 }

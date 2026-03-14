@@ -17,6 +17,7 @@ class MainActivity : ComponentActivity() {
             EpesaTheme {
                 PaymentScreen()
             }
+
         }
     }
 }

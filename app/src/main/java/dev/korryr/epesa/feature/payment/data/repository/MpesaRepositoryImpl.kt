@@ -39,13 +39,11 @@ class MpesaRepositoryImpl @Inject constructor(
             val rawPassword = "${BuildConfig.BUSINESS_SHORT_CODE}${BuildConfig.PASSKEY}$timestamp"
             val password = Base64.encodeToString(rawPassword.toByteArray(), Base64.NO_WRAP)
 
-            // 3. Format inputs
             val phone = formatPhone(phoneNumber)
             val amountInt = amount.toDouble().toInt().toString()
 
             Timber.d("STK Push → phone=$phone, amount=$amountInt")
 
-            // 4. Fire STK push
             val response = api.initiateStkPush(
                 authorization = "Bearer $token",
                 request = StkPushRequest(
