@@ -38,7 +38,7 @@ android {
         buildConfigField("String", "CALLBACK_URL",        "\"${keysProperty("mpesa.callbackUrl")}\"")
         buildConfigField("String", "BUSINESS_SHORT_CODE", "\"${keysProperty("mpesa.businessShortCode")}\"")
         buildConfigField("String", "MPESA_BASE_URL",      "\"https://sandbox.safaricom.co.ke/\"")
-    
+
     }
 
     buildTypes {
@@ -55,6 +55,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }

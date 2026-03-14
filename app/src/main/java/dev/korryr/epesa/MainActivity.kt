@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
+import dev.korryr.epesa.feature.payment.presentation.PaymentScreen
 import dev.korryr.epesa.ui.theme.EpesaTheme
 
 @AndroidEntryPoint
