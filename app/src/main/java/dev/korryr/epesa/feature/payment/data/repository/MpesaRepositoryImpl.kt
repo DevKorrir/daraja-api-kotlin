@@ -31,8 +31,10 @@ class MpesaRepositoryImpl @Inject constructor(
         amount: String
     ): Result<PaymentResult> = withContext(Dispatchers.IO) {
         runCatching {
+            // 1. Get access token
             val token = api.getAccessToken(basicAuth).accessToken
 
+            // 2. Build timestamp and password
             val timestamp = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date())
             val rawPassword = "${BuildConfig.BUSINESS_SHORT_CODE}${BuildConfig.PASSKEY}$timestamp"
             val password = Base64.encodeToString(rawPassword.toByteArray(), Base64.NO_WRAP)
