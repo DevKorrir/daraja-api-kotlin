@@ -62,7 +62,7 @@ fun PaymentScreen(
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("M-Pesa") }) }
+        topBar = { TopAppBar(title = { Text("Easy pay") }) }
     ) { padding ->
         Box(
             contentAlignment = Alignment.Center,
@@ -72,7 +72,7 @@ fun PaymentScreen(
                 onClick  = { showPayDialog = true },
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 32.dp)
             ) {
-                Text("Pay with M-Pesa")
+                Text("Pay using M-Pesa")
             }
         }
     }
